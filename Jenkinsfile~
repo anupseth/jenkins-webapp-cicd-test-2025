@@ -12,15 +12,18 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: REPO_URL
+                git branch: 'master', url: REPO_URL
             }
         }
 
-        stage('Build with Maven') {
-            steps {
-                sh 'mvn clean package -DskipTests'  // Build the JAR file
-            }
-        }
+       stage('Build with Maven') {
+           steps {
+               withMaven(maven: 'Maven3') {
+                   sh 'mvn clean package -DskipTests'
+               }
+           }
+       }
+
 
         stage('Run Tests') {
             steps {

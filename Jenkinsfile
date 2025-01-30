@@ -16,16 +16,21 @@ pipeline {
             }
         }
 
-        stage('Build with Maven') {
-            steps {
-                sh 'mvn clean package -DskipTests'  // Build the JAR file
-            }
-        }
+       stage('Build with Maven') {
+           steps {
+               withMaven(maven: 'Maven3') {
+                   sh 'mvn clean package -DskipTests'
+               }
+           }
+       }
+
 
         stage('Run Tests') {
-            steps {
-                sh 'mvn test'  // Run unit tests
-            }
+             steps {
+                           withMaven(maven: 'Maven3') {
+                             sh 'mvn test'  // Run unit tests
+                           }
+                       }
         }
 
 //         stage('Code Analysis') {
