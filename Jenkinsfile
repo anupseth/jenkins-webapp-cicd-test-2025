@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: REPO_URL
+                git branch: 'main', url: REPO_URL
             }
         }
 
@@ -35,7 +35,7 @@ pipeline {
 //                 }
 //             }
 //         }
-
+//
 //         stage('Deploy to Server') {
 //             steps {
 //                 sshagent([SERVER_CREDENTIALS]) {
@@ -46,7 +46,7 @@ pipeline {
 //                 }
 //             }
 //         }
-//     }
+    }
 
     post {
         always {
